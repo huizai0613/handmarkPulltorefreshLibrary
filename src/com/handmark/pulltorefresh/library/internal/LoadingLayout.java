@@ -52,7 +52,7 @@ public abstract class LoadingLayout extends FrameLayout implements
 	private LinearLayout mInnerLayout;
 
 	protected final ImageView mHeaderImage;
-	protected final ImageView logoImage;
+	protected final TextView logoImage;
 	protected final ProgressBar mHeaderProgress;
 
 	private boolean mUseIntrinsicAnimation;
@@ -94,7 +94,7 @@ public abstract class LoadingLayout extends FrameLayout implements
 				.findViewById(R.id.pull_to_refresh_sub_text);
 		mHeaderImage = (ImageView) mInnerLayout
 				.findViewById(R.id.pull_to_refresh_image);
-		logoImage = (ImageView) mInnerLayout
+		logoImage = (TextView) mInnerLayout
 				.findViewById(R.id.pull_to_refresh_logo);
 
 		FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) mInnerLayout
@@ -232,8 +232,12 @@ public abstract class LoadingLayout extends FrameLayout implements
 			return mInnerLayout.getWidth();
 		case VERTICAL:
 		default:
-			return mInnerLayout.getHeight();
+			return mInnerLayout.getHeight() - logoImage.getHeight();
 		}
+	}
+
+	public final void setLogoshow(boolean b) {
+		logoImage.setVisibility(b ? View.VISIBLE : View.GONE);
 	}
 
 	public final void hideAllViews() {
